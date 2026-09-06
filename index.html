@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Good news today</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --ink:#26221C; --paper:#FCFAF5; --peach:#FCEBD6; --marigold:#EE9E2A;
+    --evergreen:#1F6B4A; --muted:#8B8477; --hair:#ECE4D6; --surface:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#FCFAF5;}
+  body{color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;background:var(--paper);min-height:100dvh;}
+
+  .hero{
+    position:relative;overflow:hidden;padding:26px 20px 22px;
+    background:
+      radial-gradient(120% 90% at 88% -30%, rgba(238,158,42,.55), rgba(238,158,42,0) 60%),
+      linear-gradient(180deg, var(--peach), var(--paper));
+    border-bottom:1px solid var(--hair);
+  }
+  .greeting{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:2.05rem;line-height:1.05;letter-spacing:-.01em;margin:0 0 6px;color:var(--ink);}
+  .date{color:#7a5a2a;font-size:.95rem;font-weight:500;margin:0;}
+  .subline{color:var(--muted);font-size:.9rem;margin:14px 0 0;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .count{white-space:nowrap;}
+  .count b{color:var(--evergreen);font-weight:600;}
+  .refresh{
+    appearance:none;border:1px solid rgba(38,34,28,.18);background:var(--surface);color:var(--ink);
+    font:inherit;font-weight:600;font-size:.86rem;padding:7px 14px;border-radius:999px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;transition:border-color .15s ease;
+  }
+  .refresh:hover{border-color:rgba(38,34,28,.4);}
+  .refresh:focus-visible{outline:2px solid var(--marigold);outline-offset:2px;}
+  .refresh[disabled]{opacity:.55;cursor:default;}
+  .refresh svg{width:14px;height:14px;}
+  .refresh.spin svg{animation:spin 1s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .feed{padding:8px 20px 30px;background:var(--paper);}
+
+  .banner{margin:16px 0 4px;padding:14px 16px;background:var(--peach);border:1px solid #f0d9b6;border-radius:12px;color:#6b4a1e;font-size:.9rem;}
+  .banner strong{display:block;color:#5a3d18;margin-bottom:3px;font-weight:600;}
+  .banner .detail{display:block;margin-top:8px;font-size:.78rem;color:#8a6a3a;word-break:break-word;font-family:ui-monospace,Menlo,monospace;}
+  .banner .retry{margin-top:10px;}
+  .retry{appearance:none;border:1px solid #e2c79c;background:#fff;font:inherit;font-weight:600;font-size:.82rem;color:#6b4a1e;padding:6px 14px;border-radius:999px;cursor:pointer;}
+  .retry:hover{border-color:#c9a568;}
+
+  .story{
+    display:block;text-decoration:none;color:inherit;
+    padding:17px 0;border-bottom:1px solid var(--hair);
+  }
+  .story:last-child{border-bottom:none;}
+  .cat{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:600;color:var(--muted);margin:0 0 7px;}
+  .cat .dot{width:8px;height:8px;border-radius:50%;background:var(--c,var(--muted));flex:none;}
+  .headline{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:1.24rem;line-height:1.22;letter-spacing:-.005em;margin:0 0 6px;color:var(--ink);}
+  .story:hover .headline{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;}
+  .summary{margin:0 0 10px;font-size:.98rem;color:#3c372f;}
+  .meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0;font-size:.82rem;color:var(--muted);}
+  .meta .loc{font-weight:500;}
+  .meta .src{text-align:right;}
+
+  .sk{border-bottom:1px solid var(--hair);padding:17px 0;}
+  .sk-line{border-radius:6px;background:linear-gradient(90deg,#efe8db,#f7f1e7,#efe8db);background-size:200% 100%;animation:sh 1.4s ease infinite;}
+  .sk-line.tag{width:34%;height:9px;margin-bottom:11px;}
+  .sk-line.h{width:88%;height:16px;margin-bottom:8px;}
+  .sk-line.h2{width:62%;height:16px;margin-bottom:12px;}
+  .sk-line.m{width:44%;height:9px;}
+  @keyframes sh{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+  footer{padding:22px 20px 40px;border-top:1px solid var(--hair);color:var(--muted);font-size:.82rem;text-align:center;background:var(--paper);}
+  footer b{color:var(--evergreen);font-weight:600;}
+  footer .srcs{margin-top:6px;font-size:.76rem;opacity:.85;}
+
+  @media (prefers-reduced-motion: reduce){.refresh.spin svg{animation:none;}.sk-line{animation:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1 class="greeting">Good news today</h1>
+    <p class="date" id="date"></p>
+    <div class="subline">
+      <span class="count" id="count">Gathering stories from around the world…</span>
+      <button class="refresh" id="refresh" aria-label="Get the latest stories">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <main class="feed" id="feed"></main>
+
+  <footer>
+    A fresh set arrives <b>each day</b>. Tap any story to read the full article.
+    <div class="srcs">Sources: Good News Network · Positive News · Reasons to be Cheerful · Good for All News</div>
+  </footer>
+</div>
+
+<script>
+const FEEDS = [
+  { name:"Good News Network",      url:"https://www.goodnewsnetwork.org/feed/",     color:"#E8892B" },
+  { name:"Positive News",          url:"https://www.positive.news/feed/",           color:"#1F6B4A" },
+  { name:"Reasons to be Cheerful", url:"https://reasonstobecheerful.world/feed/",    color:"#3B6FE8" },
+  { name:"Good for All News",      url:"https://news.janegoodall.org/feed/",         color:"#B4468E" }
+];
+const WANT = 20;
+const EXCLUDE_CATS = ["this day in history","on this day","horoscopes","astrology"];
+const EXCLUDE_TITLE = /good news in history|horoscope|free will astrology/i;
+const CACHE_KEY = "pnews-rss:";
+
+const feed = document.getElementById("feed");
+const countEl = document.getElementById("count");
+const refreshBtn = document.getElementById("refresh");
+
+document.getElementById("date").textContent =
+  new Date().toLocaleDateString(undefined,{weekday:"long", month:"long", day:"numeric", year:"numeric"});
+function dateKey(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c])); }
+
+/* ---- storage (works on a normal website; degrades gracefully elsewhere) ---- */
+function cacheGet(){
+  try{ const raw = localStorage.getItem(CACHE_KEY+dateKey()); if(!raw) return null;
+    const arr = JSON.parse(raw); return Array.isArray(arr)&&arr.length ? arr : null; }catch(e){ return null; }
+}
+function cacheSet(arr){ try{ localStorage.setItem(CACHE_KEY+dateKey(), JSON.stringify(arr)); }catch(e){} }
+
+/* ---- fetching through free CORS relays, with fallbacks ---- */
+const XML_PROXIES = [
+  u => "https://api.allorigins.win/raw?url="+encodeURIComponent(u),
+  u => "https://corsproxy.io/?url="+encodeURIComponent(u),
+  u => "https://thingproxy.freeboard.io/fetch/"+u
+];
+async function getFeedItems(f){
+  for(const make of XML_PROXIES){
+    try{
+      const r = await fetch(make(f.url), {cache:"no-store"});
+      if(!r.ok) continue;
+      const text = await r.text();
+      if(text && text.indexOf("<item")>-1){
+        const items = parseRss(text, f);
+        if(items.length) return items;
+      }
+    }catch(e){}
+  }
+  // JSON fallback
+  try{
+    const r = await fetch("https://api.rss2json.com/v1/api.json?count=25&rss_url="+encodeURIComponent(f.url));
+    if(r.ok){ const j = await r.json(); if(j && j.items) return parseJson(j, f); }
+  }catch(e){}
+  throw new Error(f.name+": unreachable");
+}
+
+function tx(el, tag){ const n = el.querySelector(tag); return n ? n.textContent.trim() : ""; }
+function isExcluded(title, cats){
+  const lc = (cats||[]).map(c=>String(c).toLowerCase());
+  if(lc.some(c=>EXCLUDE_CATS.includes(c))) return true;
+  return EXCLUDE_TITLE.test(title||"");
+}
+function cleanSummary(html){
+  const div = document.createElement("div");
+  div.innerHTML = html || "";
+  let t = (div.textContent||"").replace(/\s+/g," ").trim();
+  t = t.replace(/The post .+? appeared first on .+?$/i,"").trim();
+  t = t.replace(/\[[…\.]+\]$/,"").trim();
+  if(t.length>210){ t = t.slice(0,210).replace(/\s+\S*$/,"")+"…"; }
+  else if(t && !/[.!?…]$/.test(t)) t += "…";
+  return t;
+}
+function normalize(title, link, pub, cats, desc, f){
+  return {
+    title: title, link: link,
+    date: pub ? new Date(pub) : null,
+    dateISO: pub ? new Date(pub).toISOString() : "",
+    category: (cats && cats[0]) ? cats[0] : "",
+    summary: cleanSummary(desc),
+    source: f.name, color: f.color, key: link
+  };
+}
+function parseRss(xmlText, f){
+  const doc = new DOMParser().parseFromString(xmlText, "application/xml");
+  if(doc.querySelector("parsererror")) throw new Error("xml parse");
+  const out = [];
+  Array.from(doc.querySelectorAll("item")).forEach(it=>{
+    const title = tx(it,"title"), link = tx(it,"link");
+    if(!title || !link) return;
+    const cats = Array.from(it.querySelectorAll("category")).map(c=>c.textContent.trim()).filter(Boolean);
+    if(isExcluded(title, cats)) return;
+    out.push(normalize(title, link, tx(it,"pubDate"), cats, tx(it,"description"), f));
+  });
+  return out;
+}
+function parseJson(j, f){
+  return (j.items||[]).filter(it=>!isExcluded(it.title, it.categories)).map(it=>
+    normalize(it.title, it.link, (it.pubDate||"").replace(" ","T"), it.categories, it.description||it.content||"", f)
+  );
+}
+
+/* ---- render ---- */
+function skeleton(n){ let h=""; for(let i=0;i<n;i++) h+='<div class="sk"><div class="sk-line tag"></div><div class="sk-line h"></div><div class="sk-line h2"></div><div class="sk-line m"></div></div>'; return h; }
+function cardHTML(s){
+  const d = s.date ? s.date.toLocaleDateString(undefined,{month:"short",day:"numeric"}) : "";
+  return '<a class="story" href="'+esc(s.link)+'" target="_blank" rel="noopener noreferrer">'+
+      '<span class="cat" style="--c:'+esc(s.color)+'"><span class="dot"></span>'+esc(s.source)+'</span>'+
+      '<h3 class="headline">'+esc(s.title)+'</h3>'+
+      (s.summary ? '<p class="summary">'+esc(s.summary)+'</p>' : '')+
+      '<p class="meta"><span class="loc">'+esc(s.category)+'</span><span class="src">'+esc(d)+'</span></p>'+
+    '</a>';
+}
+function render(list){
+  feed.innerHTML = list.map(cardHTML).join("");
+  countEl.innerHTML = "<b>"+list.length+"</b> stories from around the world";
+}
+function showError(detail){
+  feed.innerHTML = '<div class="banner"><strong>Couldn\'t reach the news right now.</strong>'+
+    'This is usually a brief network or relay hiccup.'+
+    (detail ? '<span class="detail">Details: '+esc(detail)+'</span>' : '')+
+    '<div><button class="retry" id="rt">Try again</button></div></div>';
+  const b = document.getElementById("rt"); if(b) b.addEventListener("click", ()=>load(true));
+  countEl.textContent = "No stories yet — tap Refresh.";
+}
+
+/* ---- main ---- */
+async function load(force){
+  refreshBtn.disabled = true; refreshBtn.classList.add("spin");
+
+  if(!force){
+    const cached = cacheGet();
+    if(cached){
+      cached.forEach(s=>{ s.date = s.dateISO ? new Date(s.dateISO) : null; });
+      render(cached); refreshBtn.disabled=false; refreshBtn.classList.remove("spin"); return;
+    }
+  }
+
+  feed.innerHTML = skeleton(8);
+  countEl.textContent = "Gathering stories from around the world…";
+
+  const results = await Promise.allSettled(FEEDS.map(getFeedItems));
+  let all = [], errs = [];
+  results.forEach((r,i)=>{ if(r.status==="fulfilled") all = all.concat(r.value); else errs.push((r.reason&&r.reason.message)||FEEDS[i].name); });
+
+  const seen = new Set();
+  all = all.filter(x=>{ if(!x.key || seen.has(x.key)) return false; seen.add(x.key); return true; });
+  all.sort((a,b)=> (b.date?b.date.getTime():0) - (a.date?a.date.getTime():0));
+  const top = all.slice(0, WANT);
+
+  if(top.length === 0){ showError(errs.join(" · ")); }
+  else { render(top); cacheSet(top); }
+
+  refreshBtn.disabled = false; refreshBtn.classList.remove("spin");
+}
+
+refreshBtn.addEventListener("click", ()=>load(true));
+load(false);
+</script>
+</body>
+</html>
